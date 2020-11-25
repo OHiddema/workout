@@ -48,7 +48,7 @@ class WorkoutController extends Controller
      */
     public function show(Workout $workout)
     {
-        //
+        return view('workouts.show', ['workout'=>$workout]);
     }
 
     /**

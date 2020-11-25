@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/workouts', 'WorkoutController@index')->middleware('auth');
 // Route::post('/articles', 'ArticlesController@store')->middleware('auth');
 // Route::get('/articles/create', 'ArticlesController@create')->middleware('auth');
-// Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/workouts/{workout}', 'WorkoutController@show');
 // Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('auth');
 // Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');
 // Route::delete('/articles/{article}', 'ArticlesController@destroy')->middleware('auth');

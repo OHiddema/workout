@@ -1,15 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-         <h1>Username: {{$user->name}}</h1>
+   <table class="table table-sm">
+      <thead class="thead-light">
+         <tr>
+            <th>Id</th>
+            <th>Date</th>
+         </tr>
+      </thead>
+      <tbody>
          @foreach ($workouts as $workout)
-         <p>workout-id: {{$workout->id}}</p>
-         <p>workout-date: {{$workout->date}}</p>
-         @endforeach        </div>
-    </div>
+            <tr>
+               <td>{{$workout->id}}</td>
+               <td><a href="/workouts/{{$workout->id}}">{{$workout->date}}</a></td>
+            </tr>
+         @endforeach
+      </tbody>
+   </table>
 </div>
+
 @endsection
 
