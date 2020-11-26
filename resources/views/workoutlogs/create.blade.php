@@ -36,17 +36,17 @@
             <tr>
                <td>Set 1</td>
                <td><input type="number" name="reps1" id="reps1" class="form-control" value="{{old('reps1')}}" required></td>
-               <td><input type="number" name="weight1" id="weight1" class="form-control" value="{{old('weight1')}}" required></td>
+               <td><input type="text" name="weight1" id="weight1" class="form-control" value="{{old('weight1')}}" required></td>
             </tr>
             <tr>
                <td>Set 2</td>
                <td><input type="number" name="reps2" id="reps2" class="form-control" value="{{old('reps2')}}" required></td>
-               <td><input type="number" name="weight2" id="weight2" class="form-control" value="{{old('weight2')}}" required></td>
+               <td><input type="text" name="weight2" id="weight2" class="form-control" value="{{old('weight2')}}" required></td>
             </tr>
             <tr>
                <td>Set 3</td>
                <td><input type="number" name="reps3" id="reps3" class="form-control" value="{{old('reps3')}}" required></td>
-               <td><input type="number" name="weight3" id="weight3" class="form-control" value="{{old('weight3')}}" required></td>
+               <td><input type="text" name="weight3" id="weight3" class="form-control" value="{{old('weight3')}}" required></td>
             </tr>
          </tbody>
       </table>
@@ -61,14 +61,14 @@
       @error('reps2')
          <p class="alert alert-danger">{{$errors->first('reps2')}}</p>
       @enderror
-      @error('kg2')
+      @error('weight2')
          <p class="alert alert-danger">{{$errors->first('weight2')}}</p>
       @enderror
 
       @error('reps3')
          <p class="alert alert-danger">{{$errors->first('reps3')}}</p>
       @enderror
-      @error('kg3')
+      @error('weight3')
          <p class="alert alert-danger">{{$errors->first('weight3')}}</p>
       @enderror
          

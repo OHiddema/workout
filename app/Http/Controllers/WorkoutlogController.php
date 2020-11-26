@@ -37,43 +37,44 @@ class WorkoutlogController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'weight1' => 'required',
-            'reps1' => 'required',
-        ]);
 
-        $validatedData = $request->validate([
-            'weight2' => 'required',
-            'reps2' => 'required',
-        ]);
-
-        $validatedData = $request->validate([
-            'weight3' => 'required',
-            'reps3' => 'required',
-        ]);
+        for ($i = 1; $i <= 3; $i++) {
+            $request->validate([
+                'weight'.$i => ['required','numeric','min:1','max:1000'],
+                'reps'.$i => ['required','numeric','min:1','max:100'],
+            ]);
+        }
 
         $workoutlog = Workoutlog::create(request()->validate([
             'exercise_id'=>['required'],
             'workout_id'=>['required']
         ]));
 
-        \App\Models\Set::create([
-            'weight' => request('weight1'),
-            'reps' => request('reps1'),
-            'workoutlog_id' => $workoutlog->id
-        ]);
+        for ($i = 1; $i <= 3; $i++) {
+            \App\Models\Set::create([
+                'weight' => request('weight'.$i),
+                'reps' => request('reps'.$i),
+                'workoutlog_id' => $workoutlog->id
+            ]);
+        }
 
-        \App\Models\Set::create([
-            'weight' => request('weight2'),
-            'reps' => request('reps2'),
-            'workoutlog_id' => $workoutlog->id
-        ]);
+        // \App\Models\Set::create([
+        //     'weight' => request('weight1'),
+        //     'reps' => request('reps1'),
+        //     'workoutlog_id' => $workoutlog->id
+        // ]);
 
-        \App\Models\Set::create([
-            'weight' => request('weight3'),
-            'reps' => request('reps3'),
-            'workoutlog_id' => $workoutlog->id
-        ]);
+        // \App\Models\Set::create([
+        //     'weight' => request('weight2'),
+        //     'reps' => request('reps2'),
+        //     'workoutlog_id' => $workoutlog->id
+        // ]);
+
+        // \App\Models\Set::create([
+        //     'weight' => request('weight3'),
+        //     'reps' => request('reps3'),
+        //     'workoutlog_id' => $workoutlog->id
+        // ]);
 
         $workout = $workoutlog->workout;
         return redirect('workoutlogs/'.$workout->id.'/create');
@@ -123,21 +124,4 @@ class WorkoutlogController extends Controller
     {
         //
     }
-
-    // protected function validateWorkoutlog()
-    // {
-    //     return request()->validate([
-    //         'exercise_id'=>['required'],
-    //         'workout_id'=>['required']
-    //     ]);
-    // }
-
-    // protected function validateSet()
-    // {
-    //     return request()->validate([
-    //         'reps'=>['required'],
-    //         'weight'=>['required']
-    //     ]);
-    // }
-
 }
