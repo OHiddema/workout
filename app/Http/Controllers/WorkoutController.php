@@ -26,7 +26,7 @@ class WorkoutController extends Controller
      */
     public function create()
     {
-        //
+        return view('workouts.create');
     }
 
     /**
@@ -37,7 +37,11 @@ class WorkoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $workout = new Workout($this->validateWorkout());
+        $workout->user_id = auth()->user()->id;
+        $workout->save();
+
+        return redirect('workoutlogs/'.$workout->id.'/create');
     }
 
     /**
@@ -84,4 +88,12 @@ class WorkoutController extends Controller
     {
         //
     }
+
+    protected function validateWorkout()
+    {
+        return request()->validate([
+            'date'=>['required']
+        ]);
+    }
+
 }

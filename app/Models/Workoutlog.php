@@ -9,6 +9,16 @@ class Workoutlog extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'exercise_id',
+        'workout_id',
+    ];
+
     public function workout() {
         return $this->belongsTo(Workout::class);
     }
