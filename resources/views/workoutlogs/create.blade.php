@@ -35,41 +35,41 @@
          <tbody>
             <tr>
                <td>Set 1</td>
-               <td><input type="number" name="reps[]" id="reps1" class="form-control" value="{{old('reps1')}}" required></td>
-               <td><input type="text" name="weight[]" id="weight1" class="form-control" value="{{old('weight1')}}" required></td>
+               <td><input type="number" name="reps[]" id="reps1" class="form-control" value="{{old('reps.0')}}" required></td>
+               <td><input type="text" name="weight[]" id="weight1" class="form-control" value="{{old('weight.0')}}" required></td>
             </tr>
             <tr>
                <td>Set 2</td>
-               <td><input type="number" name="reps[]" id="reps2" class="form-control" value="{{old('reps2')}}" required></td>
-               <td><input type="text" name="weight[]" id="weight2" class="form-control" value="{{old('weight2')}}" required></td>
+               <td><input type="number" name="reps[]" id="reps2" class="form-control" value="{{old('reps.1')}}" required></td>
+               <td><input type="text" name="weight[]" id="weight2" class="form-control" value="{{old('weight.1')}}" required></td>
             </tr>
             <tr>
                <td>Set 3</td>
-               <td><input type="number" name="reps[]" id="reps3" class="form-control" value="{{old('reps3')}}" required></td>
-               <td><input type="text" name="weight[]" id="weight3" class="form-control" value="{{old('weight3')}}" required></td>
+               <td><input type="number" name="reps[]" id="reps3" class="form-control" value="{{old('reps.2')}}" required></td>
+               <td><input type="text" name="weight[]" id="weight3" class="form-control" value="{{old('weight.2')}}" required></td>
             </tr>
          </tbody>
       </table>
 
-      @error('reps1')
-         <p class="alert alert-danger">{{$errors->first('reps1')}}</p>
+      @error('reps.0')
+         <p class="alert alert-danger">{{$errors->first('reps.0')}}</p>
       @enderror
-      @error('weight1')
-         <p class="alert alert-danger">{{$errors->first('weight1')}}</p>
-      @enderror
-
-      @error('reps2')
-         <p class="alert alert-danger">{{$errors->first('reps2')}}</p>
-      @enderror
-      @error('weight2')
-         <p class="alert alert-danger">{{$errors->first('weight2')}}</p>
+      @error('weight.0')
+         <p class="alert alert-danger">{{$errors->first('weight.0')}}</p>
       @enderror
 
-      @error('reps3')
-         <p class="alert alert-danger">{{$errors->first('reps3')}}</p>
+      @error('reps.1')
+         <p class="alert alert-danger">{{$errors->first('reps.1')}}</p>
       @enderror
-      @error('weight3')
-         <p class="alert alert-danger">{{$errors->first('weight3')}}</p>
+      @error('weight.1')
+         <p class="alert alert-danger">{{$errors->first('weight.1')}}</p>
+      @enderror
+
+      @error('reps.2')
+         <p class="alert alert-danger">{{$errors->first('reps.2')}}</p>
+      @enderror
+      @error('weight.2')
+         <p class="alert alert-danger">{{$errors->first('weight.2')}}</p>
       @enderror
          
       <button type="submit" class="btn btn-primary">Submit</button>
