@@ -15,7 +15,7 @@ class WorkoutController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $workouts = $user->workouts;
+        $workouts = $user->workouts->sortBy('date');
         return view('workouts.index',['user'=>$user,'workouts'=>$workouts]);
     }
 

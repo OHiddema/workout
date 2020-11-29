@@ -20,4 +20,8 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <a class="btn btn-primary" href="/workouts">Workouts</a>
+</div>
 @endsection
