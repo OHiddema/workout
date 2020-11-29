@@ -71,7 +71,7 @@ $(function(){
                <table class="table table-sm">
                   <thead class="thead-light">
                      <tr>
-                        <th></th>
+                        <th>Set</th>
                         <th>reps</th>
                         <th>kg</th>
                      </tr>
@@ -80,7 +80,7 @@ $(function(){
                      @for ($i = 0; $i < 10; $i++)
                      {{-- @for ($i = 0; $i < old('nsets','10'); $i++) --}}
                         <tr>
-                           <td>Set {{$i+1}}</td>
+                           <td>{{$i+1}}</td>
                            <td><input
                               type="number"
                               min="1"

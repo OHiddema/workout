@@ -26,6 +26,7 @@ Route::get('/workouts', 'WorkoutController@index')->middleware('auth');
 Route::post('/workouts', 'WorkoutController@store')->middleware('auth');
 Route::get('/workouts/create', 'WorkoutController@create')->middleware('auth');
 Route::get('/workouts/{workout}', 'WorkoutController@show')->middleware('auth');
+Route::delete('/workouts/{workout}', 'WorkoutController@destroy')->middleware('auth');
 
 // Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('auth');
 // Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');

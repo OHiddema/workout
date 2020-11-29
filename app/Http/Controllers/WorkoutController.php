@@ -86,7 +86,8 @@ class WorkoutController extends Controller
      */
     public function destroy(Workout $workout)
     {
-        //
+        $workout->delete();
+        return redirect('/workouts');
     }
 
     protected function validateWorkout()
