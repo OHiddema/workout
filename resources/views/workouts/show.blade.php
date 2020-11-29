@@ -5,6 +5,7 @@
 <div class="container">
    <p>workout-id: {{$workout->id}}</p>
    <p>workout-date: {{$workout->date}}</p>
+   <a class="btn btn-primary" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
 
    <table class="table table-sm">
       {{-- <thead class="thead-light">

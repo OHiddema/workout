@@ -37,22 +37,21 @@ class WorkoutlogController extends Controller
      */
     public function store(Request $request)
     {
+        $nsets = request('nsets');
 
-        // dd(request('reps.0'));
-        for ($i = 0; $i <= 2; $i++) {
+        for ($i = 0; $i <= $nsets-1; $i++) {
             $request->validate([
                 'weight.'.$i => ['required','numeric','min:1','max:1000'],
                 'reps.'.$i => ['required','numeric','min:1','max:100'],
             ]);
         }
-        // dd('Door de validatie gekomen!');
 
         $workoutlog = Workoutlog::create(request()->validate([
             'exercise_id'=>['required'],
             'workout_id'=>['required']
         ]));
 
-        for ($i = 0; $i <= 2; $i++) {
+        for ($i = 0; $i <= $nsets-1; $i++) {
             \App\Models\Set::create([
                 'weight' => request('weight.'.$i),
                 'reps' => request('reps.'.$i),
@@ -61,7 +60,8 @@ class WorkoutlogController extends Controller
         }
 
         $workout = $workoutlog->workout;
-        return redirect('workoutlogs/'.$workout->id.'/create');
+        // return redirect('workoutlogs/'.$workout->id.'/create');
+        return redirect('workouts/'.$workout->id);
     }
 
     /**

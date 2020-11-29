@@ -1,12 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script>
+
+$(function(){
+
+   // After validation, return the same number of rows/sets
+   aantal = $("#nsets").val();
+   for (let i = parseInt(aantal)+1; i <= 10; i++) {
+      $("#setsreps tr:nth-child(" + i + ")").hide();
+   }
+
+}); 
+
+   function oneRowLess() {
+      $aantal = $("#nsets").val();
+      if ($aantal>1) {
+         $("#setsreps tr:nth-child(" + $aantal + ")").hide();
+
+         // remove input values of row to hide
+         $("#setsreps tr:nth-child(" + $aantal + ") td input").val('');
+
+         $aantal--;
+         $("#nsets").val($aantal);
+      }
+   }
+
+   function oneRowMore() {
+      $aantal = $("#nsets").val();
+      if ($aantal<10) {
+         $aantal++;
+         $("#setsreps tr:nth-child(" + $aantal + ")").show();
+         $("#nsets").val($aantal);
+      }
+   }
+</script>
+
 <div class="container">
    <h1>Add exercise to workout</h1>
    <form action="/workoutlogs" method="post">
       @csrf
 
       <input type="hidden" name="workout_id" id="workout_id" value="{{$workout->id}}">
+
+      <!-- Show 3 sets when page is loaded for the first time -->
+      <input type="hidden" name="nsets" id="nsets" value="{{old('nsets','3')}}">
 
       <div class="form-group">
          <label for="exercise_id">Tags</label>
@@ -32,47 +71,50 @@
                <th>kg</th>
             </tr>
          </thead>
-         <tbody>
-            <tr>
-               <td>Set 1</td>
-               <td><input type="number" name="reps[0]" id="reps0" class="form-control" value="{{old('reps.0')}}" required></td>
-               <td><input type="text" name="weight[0]" id="weight0" class="form-control" value="{{old('weight.0')}}" required></td>
-            </tr>
-            <tr>
-               <td>Set 2</td>
-               <td><input type="number" name="reps[1]" id="reps1" class="form-control" value="{{old('reps.1')}}" required></td>
-               <td><input type="text" name="weight[1]" id="weight1" class="form-control" value="{{old('weight.1')}}" required></td>
-            </tr>
-            <tr>
-               <td>Set 3</td>
-               <td><input type="number" name="reps[2]" id="reps2" class="form-control" value="{{old('reps.2')}}" required></td>
-               <td><input type="text" name="weight[2]" id="weight2" class="form-control" value="{{old('weight.2')}}" required></td>
-            </tr>
+         <tbody id="setsreps">
+            @for ($i = 0; $i < 10; $i++)
+            {{-- @for ($i = 0; $i < old('nsets','10'); $i++) --}}
+               <tr>
+                  <td>Set {{$i+1}}</td>
+                  <td><input
+                     type="number"
+                     name="reps[{{$i}}]"
+                     id="reps{{$i}}"
+                     class="form-control"
+                     value='{{old("reps.".$i)}}'>
+                  </td>
+                  <td><input
+                     type="text"
+                     name="weight[{{$i}}]"
+                     id="weight{{$i}}"
+                     class="form-control"
+                     value='{{old("weight.".$i)}}'>
+                  </td>
+               </tr>
+            @endfor
          </tbody>
       </table>
 
-      @error('reps.0')
-         <p class="alert alert-danger">{{$errors->first('reps.0')}}</p>
-      @enderror
-      @error('weight.0')
-         <p class="alert alert-danger">{{$errors->first('weight.0')}}</p>
-      @enderror
-
-      @error('reps.1')
-         <p class="alert alert-danger">{{$errors->first('reps.1')}}</p>
-      @enderror
-      @error('weight.1')
-         <p class="alert alert-danger">{{$errors->first('weight.1')}}</p>
-      @enderror
-
-      @error('reps.2')
-         <p class="alert alert-danger">{{$errors->first('reps.2')}}</p>
-      @enderror
-      @error('weight.2')
-         <p class="alert alert-danger">{{$errors->first('weight.2')}}</p>
-      @enderror
+      @if ($errors->any())
+         <div class="alert alert-danger">
+            <ul>
+               {{-- @for ($i = 0; $i < 10; $i++) --}}
+               @for ($i = 0; $i < old('nsets','10'); $i++)
+                  @error('reps.'.$i)
+                     <li>{{$errors->first('reps.'.$i)}}</li>
+                  @enderror
+                  @error('weight.'.$i)
+                     <li>{{$errors->first('weight.'.$i)}}</li>
+                  @enderror          
+               @endfor
+            </ul>
+         </div>
+      @endif
          
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
+   <button onclick="oneRowLess()">-</button>
+   <button onclick="oneRowMore()">+</button>
+
 </div>
 @endsection
