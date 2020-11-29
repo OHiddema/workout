@@ -83,6 +83,8 @@ $(function(){
                            <td>Set {{$i+1}}</td>
                            <td><input
                               type="number"
+                              min="1"
+                              max="100"
                               name="reps[{{$i}}]"
                               id="reps{{$i}}"
                               class="form-control"
