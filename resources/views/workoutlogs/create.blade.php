@@ -103,12 +103,6 @@ $(function(){
                </table>
             </div>
             <div class="col-4">
-               <div class="mb-2">
-                  <button onclick="oneRowLess()">-</button> Set
-               </div>
-               <div class="mb-2">
-                  <button onclick="oneRowMore()">+</button> Set
-               </div>
                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
          </div>
@@ -131,6 +125,13 @@ $(function(){
       @endif
          
    </form>
+
+   <div class="mb-2">
+      <button onclick="oneRowLess()">-</button> Set
+   </div>
+   <div class="mb-2">
+      <button onclick="oneRowMore()">+</button> Set
+   </div>
 
 </div>
 @endsection
