@@ -53,7 +53,9 @@ $(function(){
             name="exercise_id"
             id="exercise_id"
             class="form-control"
+            required
          >
+            <option value="">Kies een oefening:</option>
             @foreach ($exercises as $exercise)
                <option value="{{$exercise->id}}">{{$exercise->name}}</option>
             @endforeach
