@@ -48,7 +48,7 @@ $(function(){
       <input type="hidden" name="nsets" id="nsets" value="{{old('nsets','3')}}">
 
       <div class="form-group">
-         <label for="exercise_id">Tags</label>
+         {{-- <label for="exercise_id">Tags</label> --}}
          <select
             name="exercise_id"
             id="exercise_id"
@@ -65,37 +65,52 @@ $(function(){
          @enderror
       </div>
 
-      <table class="table table-sm">
-         <thead class="thead-light">
-            <tr>
-               <th></th>
-               <th>reps</th>
-               <th>kg</th>
-            </tr>
-         </thead>
-         <tbody id="setsreps">
-            @for ($i = 0; $i < 10; $i++)
-            {{-- @for ($i = 0; $i < old('nsets','10'); $i++) --}}
-               <tr>
-                  <td>Set {{$i+1}}</td>
-                  <td><input
-                     type="number"
-                     name="reps[{{$i}}]"
-                     id="reps{{$i}}"
-                     class="form-control"
-                     value='{{old("reps.".$i)}}'>
-                  </td>
-                  <td><input
-                     type="text"
-                     name="weight[{{$i}}]"
-                     id="weight{{$i}}"
-                     class="form-control"
-                     value='{{old("weight.".$i)}}'>
-                  </td>
-               </tr>
-            @endfor
-         </tbody>
-      </table>
+      <div class="container">
+         <div class="row">
+            <div class="col-8">
+               <table class="table table-sm">
+                  <thead class="thead-light">
+                     <tr>
+                        <th></th>
+                        <th>reps</th>
+                        <th>kg</th>
+                     </tr>
+                  </thead>
+                  <tbody id="setsreps">
+                     @for ($i = 0; $i < 10; $i++)
+                     {{-- @for ($i = 0; $i < old('nsets','10'); $i++) --}}
+                        <tr>
+                           <td>Set {{$i+1}}</td>
+                           <td><input
+                              type="number"
+                              name="reps[{{$i}}]"
+                              id="reps{{$i}}"
+                              class="form-control"
+                              value='{{old("reps.".$i)}}'>
+                           </td>
+                           <td><input
+                              type="text"
+                              name="weight[{{$i}}]"
+                              id="weight{{$i}}"
+                              class="form-control"
+                              value='{{old("weight.".$i)}}'>
+                           </td>
+                        </tr>
+                     @endfor
+                  </tbody>
+               </table>
+            </div>
+            <div class="col-4">
+               <div class="mb-2">
+                  <button onclick="oneRowLess()">-</button> Set
+               </div>
+               <div class="mb-2">
+                  <button onclick="oneRowMore()">+</button> Set
+               </div>
+               <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+         </div>
+      </div>
 
       @if ($errors->any())
          <div class="alert alert-danger">
@@ -113,10 +128,7 @@ $(function(){
          </div>
       @endif
          
-      <button type="submit" class="btn btn-primary">Submit</button>
    </form>
-   <button onclick="oneRowLess()">-</button>
-   <button onclick="oneRowMore()">+</button>
 
 </div>
 @endsection
