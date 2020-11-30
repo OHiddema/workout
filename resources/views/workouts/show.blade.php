@@ -28,6 +28,7 @@
                @foreach ($workoutlog->sets as $set)
                   <td>{{$set->reps}}x{{$set->weight}}</td>
                @endforeach
+               <td><a class="btn btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
             </tr>
          @endforeach
       </tbody>
