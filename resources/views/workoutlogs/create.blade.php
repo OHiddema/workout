@@ -57,7 +57,11 @@ $(function(){
          >
             <option value="">Kies een oefening:</option>
             @foreach ($exercises as $exercise)
-               <option value="{{$exercise->id}}">{{$exercise->name}}</option>
+               <option value="{{$exercise->id}}"
+                  @if ( $exercise->id == old("exercise_id") )
+                     selected
+                  @endif"
+               >{{$exercise->name}}</option>
             @endforeach
          </select>
          @error('exercise_id')
