@@ -41,8 +41,15 @@ class WorkoutlogController extends Controller
 
         for ($i = 0; $i <= $nsets-1; $i++) {
             $request->validate([
-                'weight.'.$i => ['required','numeric','min:1','max:1000'],
-                'reps.'.$i => ['required','numeric','min:1','max:100'],
+                'weight.'.$i => 'bail|required|numeric|min:0|max:1000',
+                'reps.'.$i => 'bail|required|numeric|min:1|max:100',
+            ],
+            [
+                'weight.'.$i.'.required' =>'Please fill out the weight',
+                'weight.'.$i.'.numeric' =>'The weight must be a number',
+                'weight.'.$i.'.min' =>'The weight must be zero or positive',
+                'weight.'.$i.'.max' =>'The maximum weight is 1000 kg',
+                'reps.'.$i.'.required' =>'Please fill out the reps',
             ]);
         }
 
