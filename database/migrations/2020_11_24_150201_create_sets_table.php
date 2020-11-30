@@ -16,7 +16,7 @@ class CreateSetsTable extends Migration
         Schema::create('sets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('workoutlog_id');
-            $table->decimal('weight', 6, 2);
+            $table->float('weight', 8, 2);
             $table->integer('reps');
             $table->timestamps();
 
