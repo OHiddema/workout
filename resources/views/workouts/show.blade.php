@@ -12,7 +12,7 @@
       <button class="btn btn-danger mb-2" type="submit" title="delete">Delete this workout</button>
    </form>
    
-   <a class="btn btn-primary" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
+   <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
 
    <table class="table table-sm">
       {{-- <thead class="thead-light">
@@ -23,12 +23,12 @@
       </thead> --}}
       <tbody>
          @foreach ($workout->workoutlogs as $workoutlog)
-            <tr>
-               <td>{{$workoutlog->exercise->name}}</td>
+         <tr>
+            <td><a class="btn btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
+            <td>{{$workoutlog->exercise->name}}</td>
                @foreach ($workoutlog->sets as $set)
                   <td>{{$set->reps}}x{{$set->weight}}</td>
                @endforeach
-               <td><a class="btn btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
             </tr>
          @endforeach
       </tbody>
