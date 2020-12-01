@@ -154,6 +154,7 @@ class WorkoutlogController extends Controller
      */
     public function destroy(Workoutlog $workoutlog)
     {
-        //
+        $workoutlog->delete();
+        return redirect('workouts/'.$workoutlog->workout->id);
     }
 }

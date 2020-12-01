@@ -25,6 +25,13 @@
          @foreach ($workout->workoutlogs as $workoutlog)
          <tr>
             <td><a class="btn btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
+            <td>
+               <form action="/workoutlogs/{{$workoutlog->id}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger mb-2" type="submit" title="delete">Delete</button>
+               </form>
+            </td>
             <td>{{$workoutlog->exercise->name}}</td>
                @foreach ($workoutlog->sets as $set)
                   <td>{{$set->reps}}x{{$set->weight}}</td>

@@ -36,4 +36,4 @@ Route::post('/workoutlogs', 'WorkoutlogController@store')->middleware('auth');
 Route::get('/workoutlogs/{workout}/create', 'WorkoutlogController@create')->middleware('auth');
 Route::get('/workoutlogs/{workoutlog}/edit', 'WorkoutlogController@edit')->middleware('auth');
 Route::put('/workoutlogs/{workoutlog}', 'WorkoutlogController@update')->middleware('auth');
-Route::delete('/workoutlogs/{workout}', 'WorkoutlogController@destroy')->middleware('auth');
+Route::delete('/workoutlogs/{workoutlog}', 'WorkoutlogController@destroy')->middleware('auth');
