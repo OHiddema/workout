@@ -1,41 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.workoutlogs')
 
-@section('content')
-
-<script>
-
-$(function(){
-
-   // After validation, return the same number of rows/sets
-   aantal = $("#nsets").val();
-   for (let i = parseInt(aantal)+1; i <= 10; i++) {
-      $("#setsreps tr:nth-child(" + i + ")").hide();
-   }
-
-}); 
-
-   function oneRowLess() {
-      $aantal = $("#nsets").val();
-      if ($aantal>1) {
-         $("#setsreps tr:nth-child(" + $aantal + ")").hide();
-
-         // remove input values of row to hide
-         $("#setsreps tr:nth-child(" + $aantal + ") td input").val('');
-
-         $aantal--;
-         $("#nsets").val($aantal);
-      }
-   }
-
-   function oneRowMore() {
-      $aantal = $("#nsets").val();
-      if ($aantal<10) {
-         $aantal++;
-         $("#setsreps tr:nth-child(" + $aantal + ")").show();
-         $("#nsets").val($aantal);
-      }
-   }
-</script>
+@section('maincontent')
 
 <div class="container">
    <h1>Edit workout exercise</h1>
@@ -47,14 +12,9 @@ $(function(){
       <input type="hidden" name="workout_id" id="workout_id" value="{{$workoutlog->workout->id}}">
 
       <!-- nsets == number of sets in workoutlog, when page is loaded for first time -->      
-      {{-- @php
-         $iniSets = $workoutlog->sets->count();
-         dd($iniSets);
-      @endphp --}}
       <input type="hidden" name="nsets" id="nsets" value="{{old('nsets',$workoutlog->sets->count())}}">
 
       <div class="form-group">
-         {{-- <label for="exercise_id">Tags</label> --}}
          <select
             name="exercise_id"
             id="exercise_id"
@@ -88,7 +48,6 @@ $(function(){
                   </thead>
                   <tbody id="setsreps">
                      @for ($i = 0; $i < 10; $i++)
-                     {{-- @for ($i = 0; $i < old('nsets','10'); $i++) --}}
                         <tr>
                            <td>{{$i+1}}</td>
                            <td><input
@@ -137,7 +96,6 @@ $(function(){
       @if ($errors->any())
          <div class="alert alert-danger">
             <ul>
-               {{-- @for ($i = 0; $i < 10; $i++) --}}
                @for ($i = 0; $i < old('nsets','10'); $i++)
                   @error('reps.'.$i)
                      <li>{{$errors->first('reps.'.$i)}}</li>
