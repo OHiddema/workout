@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\Equipment;
+use App\Models\Bodypart;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -10,7 +12,26 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises = Exercise::all();
-        return view('exercises.index',['exercises'=>$exercises]);
+
+        if (request('equipment')) {
+            $equipment = Equipment::where('id', request('equipment'))->firstOrFail();
+            $exercises = $equipment->exercises;
+        }
+
+        if (request('bodypart')) {
+            $bodypart = Bodypart::where('id', request('bodypart'))->firstOrFail();
+            $exercises = $bodypart->exercises->intersect($exercises);
+        }
+
+        $equipments = Equipment::all()->sortBy('name');
+        $bodyparts = Bodypart::all()->sortBy('name');
+        return view('exercises.index',[
+            'exercises'=>$exercises,
+            'equipments'=>$equipments,
+            'oldequipment'=>request('equipment'),
+            'bodyparts'=>$bodyparts,
+            'oldbodypart'=>request('bodypart'),
+        ]);
     }
 
     public function create()
