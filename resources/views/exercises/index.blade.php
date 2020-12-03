@@ -34,7 +34,7 @@
             </div>
             <div class="col">
                <div class="form-group">
-                  <label for="bodypart">Choose bodypart(s):</label>
+                  <label for="bodypart">Choose bodypart:</label>
                   <select
                      name="bodypart"
                      id="bodypart"
