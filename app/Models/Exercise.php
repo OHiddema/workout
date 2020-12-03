@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Exercise extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'equipment_id',
+    ];
+
+    public function bodyparts() {
+        return $this->belongsToMany(Bodypart::class);
+    }
+
+    public function equipment() {
+        return $this->belongsTo(Equipment::class);
+    }
 }

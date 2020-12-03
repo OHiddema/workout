@@ -28,12 +28,10 @@ Route::get('/workouts/create', 'WorkoutController@create')->middleware('auth');
 Route::get('/workouts/{workout}', 'WorkoutController@show')->middleware('auth');
 Route::delete('/workouts/{workout}', 'WorkoutController@destroy')->middleware('auth');
 
-// Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('auth');
-// Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');
-// Route::delete('/articles/{article}', 'ArticlesController@destroy')->middleware('auth');
-
 Route::post('/workoutlogs', 'WorkoutlogController@store')->middleware('auth');
 Route::get('/workoutlogs/{workout}/create', 'WorkoutlogController@create')->middleware('auth');
 Route::get('/workoutlogs/{workoutlog}/edit', 'WorkoutlogController@edit')->middleware('auth');
 Route::put('/workoutlogs/{workoutlog}', 'WorkoutlogController@update')->middleware('auth');
 Route::delete('/workoutlogs/{workoutlog}', 'WorkoutlogController@destroy')->middleware('auth');
+
+Route::resource('exercises', ExerciseController::class)->middleware('auth');

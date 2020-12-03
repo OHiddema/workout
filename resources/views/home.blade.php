@@ -23,5 +23,6 @@
 
 <div class="container">
     <a class="btn btn-primary" href="/workouts">Workouts</a>
+    <a class="btn btn-primary" href="/exercises">Exercises</a>
 </div>
 @endsection
