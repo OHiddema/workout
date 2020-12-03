@@ -40,12 +40,12 @@ $(function(){
       <tbody>
          @foreach ($workout->workoutlogs as $workoutlog)
          <tr>
-            <td><a class="btn btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
+            <td><a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
             <td>
                <form class="delWorkoutlog" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger mb-2" type="submit" title="delete">Delete</button>
+                  <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
                </form>
             </td>
             <td>{{$workoutlog->exercise->name}}</td>
