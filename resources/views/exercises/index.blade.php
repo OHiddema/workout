@@ -10,13 +10,17 @@
       <a class="btn btn-primary" href="/exercises/create">Create new exercise</a>
    </div>
 
-   <form class="p-2 mb-2 rounded border border-dark" action="/exercises" method="get" style="background-color: rgb(180, 234, 255)">
+   <form id="filterform" class="p-2 mb-2 rounded border border-dark" action="/exercises" method="get" style="background-color: rgb(180, 234, 255)">
       <div class="container">
          <div class="row align-items-center">
             <div class="col">
                <div class="form-group">
                   <label for="equipment">Choose equipment:</label>
-                  <select name="equipment" id="equipment" class="form-control">
+                  <select
+                     name="equipment"
+                     id="equipment"
+                     class="form-control"
+                     onchange="event.preventDefault();document.getElementById('filterform').submit();">
                      <option value="0">All</option>
                      @foreach ($equipments as $equipment)
                         <option value="{{$equipment->id}}"
@@ -31,7 +35,11 @@
             <div class="col">
                <div class="form-group">
                   <label for="bodypart">Choose bodypart(s):</label>
-                  <select name="bodypart" id="bodypart" class="form-control">
+                  <select
+                     name="bodypart"
+                     id="bodypart"
+                     class="form-control"
+                     onchange="event.preventDefault();document.getElementById('filterform').submit();">
                      <option value="0">All</option>
                      @foreach ($bodyparts as $bodypart)
                         <option value="{{$bodypart->id}}"
@@ -42,9 +50,6 @@
                      @endforeach
                   </select> 
                </div>                  
-            </div>
-            <div class="col-auto">
-               <button class="btn btn-primary">Submit</button>                 
             </div>
          </div>
       </div>   
