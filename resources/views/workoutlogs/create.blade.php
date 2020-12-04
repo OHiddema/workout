@@ -4,6 +4,52 @@
 
 <div class="container">
    <h1>Add exercise to workout</h1>
+
+   <form id="filterform" class="p-2 mb-2 rounded border border-dark" action="/workoutlogs/{{$workout->id}}/create" method="get" style="background-color: rgb(180, 234, 255)">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col">
+               <div class="form-group">
+                  <label for="equipment">Choose equipment:</label>
+                  <select
+                     name="equipment"
+                     id="equipment"
+                     class="form-control"
+                     onchange="event.preventDefault();document.getElementById('filterform').submit();">
+                     <option value="0">All</option>
+                     @foreach ($equipments as $equipment)
+                        <option value="{{$equipment->id}}"
+                        @if ($equipment->id == $oldequipment)
+                           selected
+                        @endif"
+                        >{{$equipment->name}}</option>
+                     @endforeach
+                  </select>
+               </div>
+            </div>
+            <div class="col">
+               <div class="form-group">
+                  <label for="bodypart">Choose bodypart:</label>
+                  <select
+                     name="bodypart"
+                     id="bodypart"
+                     class="form-control"
+                     onchange="event.preventDefault();document.getElementById('filterform').submit();">
+                     <option value="0">All</option>
+                     @foreach ($bodyparts as $bodypart)
+                        <option value="{{$bodypart->id}}"
+                        @if ($bodypart->id == $oldbodypart)
+                           selected
+                        @endif"
+                        >{{$bodypart->name}}</option>
+                     @endforeach
+                  </select> 
+               </div>                  
+            </div>
+         </div>
+      </div>   
+   </form>
+
    <form action="/workoutlogs" method="post">
       @csrf
 

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Workout;
 use App\Models\Workoutlog;
+use App\Models\Exercise;
+use App\Models\Equipment;
+use App\Models\Bodypart;
+
 use Illuminate\Http\Request;
 
 class WorkoutlogController extends Controller
@@ -12,11 +17,35 @@ class WorkoutlogController extends Controller
         //
     }
 
-    public function create($workout_id)
+    public function create(Request $request, $workout_id)
     {
-        $workout = \App\Models\Workout::find($workout_id);
-        $exercises = \App\Models\Exercise::all()->sortBy('name');
-        return view('workoutlogs.create',['workout'=>$workout,'exercises'=>$exercises]);
+        $exercises = Exercise::all();
+
+        if (request('equipment')) {
+            $equipment = Equipment::where('id', request('equipment'))->firstOrFail();
+            $exercises = $equipment->exercises;
+        }
+
+        if (request('bodypart')) {
+            $bodypart = Bodypart::where('id', request('bodypart'))->firstOrFail();
+            $exercises = $bodypart->exercises->intersect($exercises);
+        }
+
+        $exercises = $exercises->sortBy('name');
+
+        $workout = Workout::find($workout_id);
+        $equipments = Equipment::all()->sortBy('name');
+        $bodyparts = Bodypart::all()->sortBy('name');
+        $oldequipment = request('equipment');
+        $oldbodypart = request('bodypart');
+        return view('workoutlogs.create',[
+            'workout'=>$workout,
+            'exercises'=>$exercises,
+            'equipments'=>$equipments,
+            'oldequipment'=>$oldequipment,
+            'bodyparts'=>$bodyparts,
+            'oldbodypart'=>$oldbodypart,
+        ]);
     }
 
     public function store(Request $request)
