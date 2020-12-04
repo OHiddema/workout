@@ -18,6 +18,21 @@ $(function(){
 
 </script>
 
+<style>
+   table{
+      width: 100%;
+      border: 2px solid black;
+   }
+
+   th,td {
+      border: 1px solid grey;
+   }
+
+   tr:nth-child(even) {
+   background-color: #ddd;
+   }
+</style>
+
 <div class="container">
    <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
 
@@ -29,21 +44,21 @@ $(function(){
    
    <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
 
-   <table class="table table-sm">
+   <table>
       <tbody>
          @foreach ($workout->workoutlogs as $workoutlog)
-         <tr>
-            <td><a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a></td>
-            <td>
-               <form class="delWorkoutlog" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
-               </form>
-            </td>
-            <td>{{$workoutlog->exercise->name}}</td>
+            <tr>
+               <td class="p-1">
+                  <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
+                  <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
+                     @csrf
+                     @method('DELETE')
+                     <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
+                  </form>
+                  <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
+               </td>
                @foreach ($workoutlog->sets as $set)
-                  <td>{{$set->reps}}x{{$set->weight}}</td>
+                  <td style="text-align: center;">{{$set->reps}}x{{$set->weight}}</td>
                @endforeach
             </tr>
          @endforeach
