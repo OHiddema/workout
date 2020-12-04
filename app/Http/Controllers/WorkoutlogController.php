@@ -89,11 +89,35 @@ class WorkoutlogController extends Controller
         //
     }
 
-    public function edit($workoutlog_id)
+    public function edit(Request $request, $workoutlog_id)
     {
+        $exercises = Exercise::all();
+
+        if (request('equipment')) {
+            $equipment = Equipment::where('id', request('equipment'))->firstOrFail();
+            $exercises = $equipment->exercises;
+        }
+
+        if (request('bodypart')) {
+            $bodypart = Bodypart::where('id', request('bodypart'))->firstOrFail();
+            $exercises = $bodypart->exercises->intersect($exercises);
+        }
+
+        $exercises = $exercises->sortBy('name');
+
+        $equipments = Equipment::all()->sortBy('name');
+        $bodyparts = Bodypart::all()->sortBy('name');
+        $oldequipment = request('equipment');
+        $oldbodypart = request('bodypart');
         $workoutlog = \App\Models\Workoutlog::find($workoutlog_id);
-        $exercises = \App\Models\Exercise::all()->sortBy('name');
-        return view('workoutlogs.edit', ['workoutlog'=>$workoutlog,'exercises'=>$exercises]);
+        return view('workoutlogs.edit', [
+            'workoutlog'=>$workoutlog,
+            'exercises'=>$exercises,
+            'equipments'=>$equipments,
+            'oldequipment'=>$oldequipment,
+            'bodyparts'=>$bodyparts,
+            'oldbodypart'=>$oldbodypart,
+        ]);
     }
 
     public function update(Request $request, Workoutlog $workoutlog)
