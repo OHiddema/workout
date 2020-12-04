@@ -19,8 +19,7 @@ $(function(){
 </script>
 
 <div class="container">
-   <p>workout-id: {{$workout->id}}</p>
-   <p>workout-date: {{$workout->date}}</p>
+   <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
 
    <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
       @csrf
