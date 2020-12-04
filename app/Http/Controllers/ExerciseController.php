@@ -36,7 +36,12 @@ class ExerciseController extends Controller
 
     public function create()
     {
-        return view('exercises.create',['equipments' => \App\Models\Equipment::all(), 'bodyparts' => \App\Models\Bodypart::all()]);
+        $equipments = Equipment::all()->sortBy('name');
+        $bodyparts = Bodypart::all()->sortBy('name');
+        return view('exercises.create',[
+            'equipments' => $equipments,
+            'bodyparts' => $bodyparts,
+        ]);
     }
 
     public function store(Request $request)
@@ -56,7 +61,13 @@ class ExerciseController extends Controller
 
     public function edit(Exercise $exercise)
     {
-        return view('exercises.edit', ['exercise'=>$exercise, 'equipments' => \App\Models\Equipment::all(), 'bodyparts' => \App\Models\Bodypart::all()]);
+        $equipments = Equipment::all()->sortBy('name');
+        $bodyparts = Bodypart::all()->sortBy('name');
+        return view('exercises.edit', [
+            'exercise' => $exercise,
+            'equipments' => $equipments,
+            'bodyparts' => $bodyparts
+        ]);
     }
 
     public function update(Request $request, Exercise $exercise)

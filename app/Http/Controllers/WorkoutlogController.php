@@ -25,7 +25,7 @@ class WorkoutlogController extends Controller
     public function create($workout_id)
     {
         $workout = \App\Models\Workout::find($workout_id);
-        $exercises = \App\Models\Exercise::all();
+        $exercises = \App\Models\Exercise::all()->sortBy('name');
         return view('workoutlogs.create',['workout'=>$workout,'exercises'=>$exercises]);
     }
 
@@ -93,7 +93,7 @@ class WorkoutlogController extends Controller
     public function edit($workoutlog_id)
     {
         $workoutlog = \App\Models\Workoutlog::find($workoutlog_id);
-        $exercises = \App\Models\Exercise::all();
+        $exercises = \App\Models\Exercise::all()->sortBy('name');
         return view('workoutlogs.edit', ['workoutlog'=>$workoutlog,'exercises'=>$exercises]);
     }
 
