@@ -55,8 +55,8 @@
 
       <input type="hidden" name="workout_id" id="workout_id" value="{{$workout->id}}">
 
-      <!-- Show 3 sets when page is loaded for the first time -->
-      <input type="hidden" name="nsets" id="nsets" value="{{old('nsets','3')}}">
+      <!-- Show 1 set when page is loaded for the first time -->
+      <input type="hidden" name="nsets" id="nsets" value="{{old('nsets','1')}}">
 
       <div class="form-group">
          <select
