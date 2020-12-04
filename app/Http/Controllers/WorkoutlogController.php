@@ -7,21 +7,11 @@ use Illuminate\Http\Request;
 
 class WorkoutlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($workout_id)
     {
         $workout = \App\Models\Workout::find($workout_id);
@@ -29,12 +19,6 @@ class WorkoutlogController extends Controller
         return view('workoutlogs.create',['workout'=>$workout,'exercises'=>$exercises]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $nsets = request('nsets');
@@ -71,25 +55,11 @@ class WorkoutlogController extends Controller
         return redirect('workouts/'.$workout->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Workoutlog  $workoutlog
-     * @return \Illuminate\Http\Response
-     */
     public function show(Workoutlog $workoutlog)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Workoutlog  $workoutlog
-     * @return \Illuminate\Http\Response
-     */
-
-     // public function edit(Workoutlog $workoutlog)
     public function edit($workoutlog_id)
     {
         $workoutlog = \App\Models\Workoutlog::find($workoutlog_id);
@@ -97,13 +67,6 @@ class WorkoutlogController extends Controller
         return view('workoutlogs.edit', ['workoutlog'=>$workoutlog,'exercises'=>$exercises]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Workoutlog  $workoutlog
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Workoutlog $workoutlog)
     {
         $nsets = request('nsets');
@@ -122,11 +85,6 @@ class WorkoutlogController extends Controller
             ]);
         }
 
-        // $workoutlog = Workoutlog::create(request()->validate([
-        //     'exercise_id'=>['required'],
-        //     'workout_id'=>['required']
-        // ]));
-
         // Delete the 'old' sets
         \App\Models\Set::where('workoutlog_id',$workoutlog->id)->delete();
 
@@ -142,16 +100,9 @@ class WorkoutlogController extends Controller
         $workoutlog->update(['exercise_id' => request('exercise_id')]);
 
         $workout = $workoutlog->workout;
-        // return redirect('workoutlogs/'.$workout->id.'/create');
         return redirect('workouts/'.$workout->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Workoutlog  $workoutlog
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Workoutlog $workoutlog)
     {
         $workoutlog->delete();

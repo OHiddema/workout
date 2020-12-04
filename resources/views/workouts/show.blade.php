@@ -31,12 +31,6 @@ $(function(){
    <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
 
    <table class="table table-sm">
-      {{-- <thead class="thead-light">
-         <tr>
-            <th>Id</th>
-            <th>Date</th>
-         </tr>
-      </thead> --}}
       <tbody>
          @foreach ($workout->workoutlogs as $workoutlog)
          <tr>
