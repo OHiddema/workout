@@ -23,6 +23,7 @@ class ExerciseController extends Controller
             $exercises = $bodypart->exercises->intersect($exercises);
         }
 
+        $exercises = $exercises->sortBy('name');
         $equipments = Equipment::all()->sortBy('name');
         $bodyparts = Bodypart::all()->sortBy('name');
         return view('exercises.index',[
