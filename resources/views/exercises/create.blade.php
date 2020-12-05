@@ -45,6 +45,7 @@
             id="bodyparts"
             class="form-control"
             multiple
+            required
          >
             @foreach ($bodyparts as $bodypart)
                <option value="{{$bodypart->id}}">{{$bodypart->name}}</option>

@@ -47,7 +47,10 @@ class ExerciseController extends Controller
 
     public function store(Request $request)
     {
-        $exercise = new Exercise($this->validateExercise());
+        $this->validateExercise();
+        $exercise = new Exercise();
+        $exercise->name = request('name');
+        $exercise->equipment_id = request('equipment_id');
         $exercise->save();
 
         $exercise->bodyparts()->attach(request('bodyparts'));
@@ -73,7 +76,10 @@ class ExerciseController extends Controller
 
     public function update(Request $request, Exercise $exercise)
     {
-        $exercise->update($this->validateExercise());
+        $this->validateExercise();
+        $exercise->name = request('name');
+        $exercise->equipment_id = request('equipment_id');
+
         $exercise->bodyparts()->detach();
         $exercise->bodyparts()->attach(request('bodyparts'));
         return redirect('/exercises/'.$exercise->id);
@@ -90,6 +96,7 @@ class ExerciseController extends Controller
         return request()->validate([
             'name'=>['required','min:3'],
             'equipment_id'=>['required'],
+            'bodyparts'=>['required'],
         ]);
     }
 }
