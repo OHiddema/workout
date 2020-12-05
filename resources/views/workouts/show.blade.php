@@ -36,13 +36,17 @@ $(function(){
 <div class="container">
    <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
 
-   <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
-      @csrf
-      @method('DELETE')
-      <button class="btn btn-danger mb-2" type="submit" title="delete">Delete this workout</button>
-   </form>
+   <div class="d-inline-block">
+      <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
+         @csrf
+         @method('DELETE')
+         <button class="btn btn-danger mb-2" type="submit" title="delete">Delete this workout</button>
+      </form>
+   
+   </div>
    
    <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
+   <a class="btn btn-primary mb-2" href="/workouts">Back to workouts</a>
 
    <table>
       <tbody>
