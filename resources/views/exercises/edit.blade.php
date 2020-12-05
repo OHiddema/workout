@@ -63,7 +63,7 @@
       </div>
 
       <button class="btn btn-primary" type="submit">Submit</button>
-      <a class="btn btn-primary" href="{{ url()->previous() }}">Decline</a>
+      <a class="btn btn-primary" href="/exercises/{{$exercise->id}}">Decline</a>
    </form>
 </div>
 
