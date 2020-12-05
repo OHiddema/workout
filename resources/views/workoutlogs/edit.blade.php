@@ -135,6 +135,7 @@
                   <button type="button" onclick="oneRowMore()">+</button> Set
                </div>
                <button type="submit" class="btn btn-primary">Submit</button>
+               <a class="btn btn-primary" href="{{ url()->previous() }}">Decline</a>
             </div>
          </div>
       </div>

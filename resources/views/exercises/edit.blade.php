@@ -62,7 +62,8 @@
          @enderror
       </div>
 
-      <button class="btn btn-primary mt-2" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <a class="btn btn-primary" href="{{ url()->previous() }}">Decline</a>
    </form>
 </div>
 
