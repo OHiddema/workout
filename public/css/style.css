@@ -1,0 +1,13 @@
+table{
+   width: 100%;
+   border: 2px solid black;
+}
+
+td {
+   border: 1px solid grey;
+   text-align: center;
+}
+
+tr:nth-child(even) {
+background-color: #ddd;
+}

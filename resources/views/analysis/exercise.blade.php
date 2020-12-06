@@ -2,22 +2,6 @@
 
 @section('content')
 
-<style>
-   table{
-      width: 100%;
-      border: 2px solid black;
-   }
-
-   td {
-      border: 1px solid grey;
-      text-align: center;
-   }
-
-   tr:nth-child(even) {
-   background-color: #ddd;
-   }
-</style>
-
 <div class="container">
 
    <form id="filterform" class="p-2 mb-2 rounded border border-dark" action="/analysis/exercise" method="get" style="background-color: rgb(180, 234, 255)">

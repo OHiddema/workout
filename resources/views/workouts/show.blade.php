@@ -18,21 +18,6 @@ $(function(){
 
 </script>
 
-<style>
-   table{
-      width: 100%;
-      border: 2px solid black;
-   }
-
-   th,td {
-      border: 1px solid grey;
-   }
-
-   tr:nth-child(even) {
-   background-color: #ddd;
-   }
-</style>
-
 <div class="container">
    <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
 
@@ -52,7 +37,7 @@ $(function(){
       <tbody>
          @foreach ($workout->workoutlogs as $workoutlog)
             <tr>
-               <td class="p-1">
+               <td class="p-1" style="text-align: left;">
                   <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
                   <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
                      @csrf
@@ -62,7 +47,7 @@ $(function(){
                   <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
                </td>
                @foreach ($workoutlog->sets as $set)
-                  <td style="text-align: center;">{{$set->reps}}x{{$set->weight}}</td>
+                  <td>{{$set->reps}}x{{$set->weight}}</td>
                @endforeach
             </tr>
          @endforeach
