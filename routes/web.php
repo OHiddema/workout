@@ -35,3 +35,5 @@ Route::put('/workoutlogs/{workoutlog}', 'WorkoutlogController@update')->middlewa
 Route::delete('/workoutlogs/{workoutlog}', 'WorkoutlogController@destroy')->middleware('auth');
 
 Route::resource('exercises', ExerciseController::class)->middleware('auth');
+
+Route::get('/analysis/exercise','AnalysisController@test')->middleware('auth');
