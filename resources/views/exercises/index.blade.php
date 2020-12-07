@@ -56,7 +56,7 @@
    </form>
 
    <table class="table table-sm">
-      <thead class="thead-light">
+      <thead class="thead-light" style="text-align: center">
          <tr>
             <th>Exercise</th>
             <th>Equipment</th>
