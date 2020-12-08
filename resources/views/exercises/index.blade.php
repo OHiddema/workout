@@ -4,9 +4,7 @@
 
 <div class="container">
 
-   <h1>All Exercises</h1>
-
-   <div class="mb-2">
+   <div class="text-center mb-2">
       <a class="btn btn-primary" href="/exercises/create">Create new exercise</a>
    </div>
 
@@ -15,7 +13,7 @@
          <div class="row align-items-center">
             <div class="col">
                <div class="form-group">
-                  <label for="equipment">Choose equipment:</label>
+                  <label for="equipment">Filter exercises on equipment used:</label>
                   <select
                      name="equipment"
                      id="equipment"
@@ -34,7 +32,7 @@
             </div>
             <div class="col">
                <div class="form-group">
-                  <label for="bodypart">Choose bodypart:</label>
+                  <label for="bodypart">Filter exercises on bodypart used:</label>
                   <select
                      name="bodypart"
                      id="bodypart"
