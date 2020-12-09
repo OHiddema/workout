@@ -67,8 +67,8 @@
                             <img class="img-fluid" src="images/progress.png" alt="alternative">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Exercises</h4>
-                            <p>Manage the available exercises</p>
+                            <h4 class="card-title">Progress</h4>
+                            <p>Track your progress</p>
                         </div>
                     </div>
                 </a>
@@ -81,8 +81,8 @@
                             <img class="img-fluid" src="images/exercises.png" alt="alternative">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Progress</h4>
-                            <p>Track your progress</p>
+                            <h4 class="card-title">Exercises</h4>
+                            <p>Manage the available exercises</p>
                         </div>
                     </div>
                 </a>
