@@ -1,0 +1,82 @@
+/* Template: Tivo - SaaS App HTML Landing Page Template
+   Author: Inovatik
+   Created: Sep 2019
+   Description: Master CSS file
+*/
+
+/*****************************************
+Colors:
+- Backgrounds, buttons, bullets, icons - blue #5f4dee
+- Backgrounds, light button, light body text - light gray #f3f7fd
+- Headings text - black #333
+- Body text - dark gray #555
+******************************************/
+
+/***************************/
+/*     06. Description     */
+/***************************/
+.cards-1 {
+	padding-top: 3.25rem;
+	padding-bottom: 3rem;
+	text-align: center;
+}
+
+.cards-1 .h2-heading {
+	margin-bottom: 3.5rem;
+}
+
+.cards-1 .card {
+	max-width: 21rem;
+	margin-right: auto;
+	margin-bottom: 3.5rem;
+	margin-left: auto;
+	padding: 0;
+	border: none;
+	background-color: lightblue;
+}
+
+.cards-1 .card-image {
+	max-width: 16rem;
+	margin-right: auto;
+	margin-bottom: 2rem;
+	margin-left: auto;
+}
+
+.cards-1 .card-title {
+	margin-bottom: 0.5rem;
+}
+
+.cards-1 .card-body {
+	padding: 0;
+}
+
+/*****************************/
+/*     19. Media Queries     */
+/*****************************/	
+
+@media (min-width: 992px) {
+	.cards-1 .card {
+		display: inline-block;
+		width: 17rem;
+		max-width: 100%;
+		margin-right: 1rem;
+		margin-left: 1rem;
+		vertical-align: top;
+	}
+
+	.cards-1 .card-image {
+		width: 9rem;
+	}
+}
+
+@media (min-width: 1200px) {
+	.cards-1 .card {
+		width: 18.875rem;
+		margin-right: 2rem;
+		margin-left: 2rem;
+	}
+
+	.cards-1 .card-image {
+		width: 12.5rem;
+	}
+}

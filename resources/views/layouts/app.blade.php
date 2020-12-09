@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/template.css') }}" rel="stylesheet">
 
     <!-- Bootstrap simple sidebar https://startbootstrap.com/template/simple-sidebar -->
     <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
