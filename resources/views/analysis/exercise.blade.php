@@ -14,7 +14,8 @@
                   name="equipment"
                   id="equipment"
                   class="form-control"
-                  onchange="event.preventDefault();document.getElementById('filterform').submit();">
+                  {{-- onchange="event.preventDefault();document.getElementById('filterform').submit();"> --}}
+                  onchange="event.preventDefault();$('#filterform').submit();">
                   <option value="0">All</option>
                   @foreach ($equipments as $equipment)
                      <option value="{{$equipment->id}}"
@@ -33,7 +34,8 @@
                   name="bodypart"
                   id="bodypart"
                   class="form-control"
-                  onchange="event.preventDefault();document.getElementById('filterform').submit();">
+                  {{-- onchange="event.preventDefault();document.getElementById('filterform').submit();"> --}}
+                  onchange="event.preventDefault();$('#filterform').submit();">
                   <option value="0">All</option>
                   @foreach ($bodyparts as $bodypart)
                      <option value="{{$bodypart->id}}"
