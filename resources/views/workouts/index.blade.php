@@ -35,9 +35,11 @@
    </form>
 
    <div class="text-center">
-      @foreach ($workouts as $workout)
+      @forelse ($workouts as $workout)
          <a class="d-block" href="/workouts/{{$workout->id}}">{{date('D d-m-Y', strtotime($workout->date))}}</a>
-      @endforeach
+      @empty
+          No workouts found!
+      @endforelse
    </div>
 
 </div>
