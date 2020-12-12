@@ -154,8 +154,13 @@
             position: 'none'
          },
 
+         backgroundColor: {
+            stroke: '#000000',
+            strokeWidth: 4,
+         },
+
          pointSize: 5,
-         width:$('#myTable').width(),
+         width:$('#myTable').width()+4,
          height:$('#myTable').width()*0.5,
 
       };
