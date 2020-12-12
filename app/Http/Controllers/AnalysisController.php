@@ -39,6 +39,20 @@ class AnalysisController extends Controller
             $exercise_id = 0;
         }
 
+        // Determine maximum number of sets in one workoutlog in table
+        // Neccessary for building up the first row of the table
+        $maxSets = DB::table('sets')
+                ->select(DB::raw('workoutlogs.id as ID'),DB::raw('COUNT(sets.id) as aantal'))
+                ->join('workoutlogs','sets.workoutlog_id','workoutlogs.id')
+                ->join('workouts','workoutlogs.workout_id','workouts.id')
+                ->where('workouts.user_id','=',auth()->user()->id)
+                ->where('workoutlogs.exercise_id','=',$exercise_id)
+                ->orderBy('workoutlogs.id')
+                ->groupBy('workoutlogs.id')
+                ->get()
+                ->max('aantal');
+
+        // Get the data for the chart
         $sets = DB::table('sets')
                 ->select(DB::raw('workouts.date as Date'),DB::raw('MAX((weight*(1+reps/30))) as oneRM'))
                 ->join('workoutlogs','sets.workoutlog_id','workoutlogs.id')
@@ -63,6 +77,7 @@ class AnalysisController extends Controller
             'bodyparts'=>$bodyparts,
             'oldbodypart'=>$oldbodypart,
             'graphData'=>json_encode($res),
+            'maxSets'=>$maxSets,
         ]);
     }
 }

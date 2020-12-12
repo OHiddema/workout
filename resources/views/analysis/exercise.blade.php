@@ -73,84 +73,96 @@
 
    </form>
 
-   <table id="myTable">
-      <tbody>
-         @foreach ($workouts as $workout)
-            @foreach ($workout->workoutlogs as $workoutlog)
-               @if ($workoutlog->exercise_id == $exercise_id)
-                  <tr>
-                     <td>
-                        {{date('d-m-Y', strtotime($workout->date))}}
-                     </td>
-                     @foreach ($workoutlog->sets as $set)
+   @if ($exercise_id > 0)
+      <table class="table table-sm" id="myTable">
+         <thead class="thead-light" style="text-align: center">
+            <tr>
+               <th>Training date</th>
+               @for ($i = 1; $i <= $maxSets; $i++)
+                  <th>Set {{$i}}</th>
+               @endfor
+            </tr>
+         </thead>
+         <tbody>
+            @foreach ($workouts as $workout)
+               @foreach ($workout->workoutlogs as $workoutlog)
+                  @if ($workoutlog->exercise_id == $exercise_id)
+                     <tr>
                         <td>
-                           {{$set->reps}}x{{$set->weight}}
+                           {{date('d-m-Y', strtotime($workout->date))}}
                         </td>
-                     @endforeach
-                  </tr>
-               @endif                  
+                        @foreach ($workoutlog->sets as $set)
+                           <td>
+                              {{$set->reps}}x{{$set->weight}}
+                           </td>
+                        @endforeach
+                     </tr>
+                  @endif                  
+               @endforeach
             @endforeach
-         @endforeach
-      </tbody>
-   </table>
+         </tbody>
+      </table>       
+   @endif
 
-   {{-- <div id="linechart" style="width: 1000px; height: 500px"></div> --}}
    <div id="linechart"></div>
 
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript">
-
-      // Make chart responsive
-      $(function(){
-         $(window).resize(function(){
-            lineChart();
-         });
-      }); 
-
-      var graphData = <?php echo $graphData; ?>;
-      google.charts.load('current', {
-         'packages': ['corechart']
-      });
-      google.charts.setOnLoadCallback(lineChart);
-
-      function lineChart() {
-         var data = new google.visualization.DataTable();
-         data.addColumn('datetime', 'date');
-         data.addColumn('number', 'oneRM');
-         for (i=0;i<graphData.length;i++) {
-            data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
-         }
-         
-         var options = {
-         
-            hAxis: {
-               title: 'Date',
-               format: 'd MMM yy'
-            },
-
-            vAxis: {
-               title: 'Estimated 1RM',
-               minValue: 0
-            },
-
-            title: 'Progression',
-            curveType: 'function',
-            
-            legend: {
-               position: 'none'
-            },
-
-            pointSize: 10,
-            width:$('#myTable').width(),
-            height:$('#myTable').width()*0.5,
-
-         };
-
-         var chart = new google.visualization.LineChart(document.getElementById('linechart'));
-         chart.draw(data, options);
-      }        
-   </script>  
-
 </div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+   // Make chart responsive
+   $(function(){
+      $(window).resize(function(){
+         lineChart();
+      });
+   }); 
+
+   var graphData = <?php echo $graphData; ?>;
+   google.charts.load('current', {
+      'packages': ['corechart']
+   });
+   google.charts.setOnLoadCallback(lineChart);
+
+   function lineChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'date');
+      data.addColumn('number', 'oneRM');
+      for (i=0;i<graphData.length;i++) {
+         data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
+      }
+      
+      var options = {
+      
+         hAxis: {
+            title: 'Date',
+            format: 'd MMM yy'
+         },
+
+         vAxis: {
+            title: 'Estimated 1RM',
+            minValue: 0
+         },
+
+         title: 'Estimated 1RM progression over time',
+
+         titleTextStyle: {
+            fontSize: 24,
+         },
+
+         legend: {
+            position: 'none'
+         },
+
+         pointSize: 5,
+         width:$('#myTable').width(),
+         height:$('#myTable').width()*0.5,
+
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+      chart.draw(data, options);
+   }        
+</script>  
 
 @endsection
