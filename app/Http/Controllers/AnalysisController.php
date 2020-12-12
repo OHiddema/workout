@@ -65,7 +65,7 @@ class AnalysisController extends Controller
 
         $res = null;
         foreach ($sets as $key => $val) {
-            $res[$key++] = [strtotime($val->Date)*1000, $val->oneRM];
+            $res[$key++] = [$val->Date, $val->oneRM];
         }
 
         return view('analysis.exercise', [
