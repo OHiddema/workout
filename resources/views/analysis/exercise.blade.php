@@ -126,7 +126,7 @@
 
    function lineChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'date');
+      data.addColumn('date', 'date');
       data.addColumn('number', 'oneRM');
       for (i=0;i<graphData.length;i++) {
          data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
