@@ -73,7 +73,7 @@
 
    </form>
 
-   <table>
+   <table id="myTable">
       <tbody>
          @foreach ($workouts as $workout)
             @foreach ($workout->workoutlogs as $workoutlog)
@@ -94,7 +94,63 @@
       </tbody>
    </table>
 
+   {{-- <div id="linechart" style="width: 1000px; height: 500px"></div> --}}
+   <div id="linechart"></div>
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+
+      // Make chart responsive
+      $(function(){
+         $(window).resize(function(){
+            lineChart();
+         });
+      }); 
+
+      var graphData = <?php echo $graphData; ?>;
+      google.charts.load('current', {
+         'packages': ['corechart']
+      });
+      google.charts.setOnLoadCallback(lineChart);
+
+      function lineChart() {
+         var data = new google.visualization.DataTable();
+         data.addColumn('datetime', 'date');
+         data.addColumn('number', 'oneRM');
+         for (i=0;i<graphData.length;i++) {
+            data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
+         }
+         
+         var options = {
+         
+            hAxis: {
+               title: 'Date',
+               format: 'd MMM yy'
+            },
+
+            vAxis: {
+               title: 'Estimated 1RM',
+               minValue: 0
+            },
+
+            title: 'Progression',
+            curveType: 'function',
+            
+            legend: {
+               position: 'none'
+            },
+
+            pointSize: 10,
+            width:$('#myTable').width(),
+            height:$('#myTable').width()*0.5,
+
+         };
+
+         var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+         chart.draw(data, options);
+      }        
+   </script>  
+
 </div>
 
 @endsection
-

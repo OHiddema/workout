@@ -38,6 +38,22 @@ class AnalysisController extends Controller
         } else {
             $exercise_id = 0;
         }
+
+        $sets = DB::table('sets')
+                ->select(DB::raw('workouts.date as Date'),DB::raw('MAX((weight*(1+reps/30))) as oneRM'))
+                ->join('workoutlogs','sets.workoutlog_id','workoutlogs.id')
+                ->join('workouts','workoutlogs.workout_id','workouts.id')
+                ->where('workouts.user_id','=',auth()->user()->id)
+                ->where('workoutlogs.exercise_id','=',$exercise_id)
+                ->orderBy('workouts.date')
+                ->groupBy('workouts.date')
+                ->get();
+
+        $res = null;
+        foreach ($sets as $key => $val) {
+            $res[$key++] = [strtotime($val->Date)*1000, $val->oneRM];
+        }
+
         return view('analysis.exercise', [
             'workouts'=>$workouts,
             'exercise_id'=>$exercise_id,
@@ -46,6 +62,7 @@ class AnalysisController extends Controller
             'oldequipment'=>$oldequipment,
             'bodyparts'=>$bodyparts,
             'oldbodypart'=>$oldbodypart,
+            'graphData'=>json_encode($res),
         ]);
     }
 }
