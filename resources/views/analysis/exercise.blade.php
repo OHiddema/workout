@@ -79,7 +79,7 @@
             <tr>
                <th>Training date</th>
                @for ($i = 1; $i <= $maxSets; $i++)
-                  <th>Set {{$i}}</th>
+                  <th>Set {{$i}}<br><small>reps x kg</small></th>
                @endfor
             </tr>
          </thead>
@@ -93,7 +93,7 @@
                         </td>
                         @foreach ($workoutlog->sets as $set)
                            <td>
-                              {{$set->reps}}x{{$set->weight}}
+                              {{$set->reps}} x {{$set->weight}}
                            </td>
                         @endforeach
                      </tr>

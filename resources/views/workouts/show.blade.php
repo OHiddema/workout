@@ -47,7 +47,7 @@ $(function(){
                   <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
                </td>
                @foreach ($workoutlog->sets as $set)
-                  <td>{{$set->reps}}x{{$set->weight}}</td>
+                  <td>{{$set->reps}} x {{$set->weight}}</td>
                @endforeach
             </tr>
          @endforeach
