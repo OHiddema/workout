@@ -111,10 +111,13 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-   // Make chart responsive
    $(function(){
+      // Force redrawing to resize
+      lineChart();
+
+      // Make chart responsive
       $(window).resize(function(){
-         lineChart();
+            lineChart();
       });
    }); 
 
