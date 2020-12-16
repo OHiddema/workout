@@ -5,11 +5,11 @@
 <script>
 
 $(function(){
-   if ({{$workout->rating}} >= 1) {$('#star1').addClass('checked');}
-   if ({{$workout->rating}} >= 2) {$('#star2').addClass('checked');}
-   if ({{$workout->rating}} >= 3) {$('#star3').addClass('checked');}
-   if ({{$workout->rating}} >= 4) {$('#star4').addClass('checked');}
-   if ({{$workout->rating}} >= 5) {$('#star5').addClass('checked');}
+   if ({{$workout->rating}} < 1) {$('#star1').addClass('checked');}
+   if ({{$workout->rating}} < 2) {$('#star2').addClass('checked');}
+   if ({{$workout->rating}} < 3) {$('#star3').addClass('checked');}
+   if ({{$workout->rating}} < 4) {$('#star4').addClass('checked');}
+   if ({{$workout->rating}} < 5) {$('#star5').addClass('checked');}
 
    $(".delWorkoutlog").on("submit", function(){
       return confirm("Are you sure you want to delete this exercise?");
