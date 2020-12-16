@@ -24,17 +24,19 @@ $(function(){
 </script>
 
 <div class="container">
-   <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
+   <h3>Training: {{date('l j-n-Y', strtotime($workout->date))}}</h3>
 
-   Rating: <br>
+   <div>Rating:</div>
    <span class="fa fa-star" id="star1"></span>
    <span class="fa fa-star" id="star2"></span>
    <span class="fa fa-star" id="star3"></span>
    <span class="fa fa-star" id="star4"></span>
    <span class="fa fa-star" id="star5"></span>
 
-   <p class="mb-0 mt-2">Remarks:</p> 
-   <div>{{$workout->remarks}}</div>
+   <div>Remarks:</div>
+   <div class="mb-2">
+      <span class="rounded p-1" style="background-color: lightgrey">{{$workout->remarks}}</span>
+   </div>
 
    <div class="d-inline-block">
       <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
@@ -47,7 +49,6 @@ $(function(){
    
    <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/edit">Edit workout</a>
    <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
-   <a class="btn btn-primary mb-2" href="/workouts">Back to workouts</a>
 
    <table>
       <tbody>

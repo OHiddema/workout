@@ -80,10 +80,10 @@
          <label for="remarks">Remark(s)</label>
          <br>
          <textarea
-            cols="30"
-            rows="5"
             name="remarks"
-            id="remarks">{{old('remarks',$workout->remarks)}}</textarea>
+            id="remarks"
+            class="form-control"
+         >{{old('remarks',$workout->remarks)}}</textarea>
          @error('remarks')
             <p class="alert alert-danger">{{$errors->first('remarks')}}</p>
          @enderror
