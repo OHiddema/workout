@@ -14,9 +14,7 @@ class Workout extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'date',
-    ];
+    protected $fillable = ['date','rating','remarks',];
 
     public function user() {
         return $this->belongsTo(User::class);

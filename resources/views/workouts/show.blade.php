@@ -5,6 +5,11 @@
 <script>
 
 $(function(){
+   if ({{$workout->rating}} >= 1) {$('#star1').addClass('checked');}
+   if ({{$workout->rating}} >= 2) {$('#star2').addClass('checked');}
+   if ({{$workout->rating}} >= 3) {$('#star3').addClass('checked');}
+   if ({{$workout->rating}} >= 4) {$('#star4').addClass('checked');}
+   if ({{$workout->rating}} >= 5) {$('#star5').addClass('checked');}
 
    $(".delWorkoutlog").on("submit", function(){
       return confirm("Are you sure you want to delete this exercise?");
@@ -21,6 +26,16 @@ $(function(){
 <div class="container">
    <h1>{{date('D d-m-Y', strtotime($workout->date))}}</h1>
 
+   Rating: <br>
+   <span class="fa fa-star" id="star1"></span>
+   <span class="fa fa-star" id="star2"></span>
+   <span class="fa fa-star" id="star3"></span>
+   <span class="fa fa-star" id="star4"></span>
+   <span class="fa fa-star" id="star5"></span>
+
+   <p class="mb-0 mt-2">Remarks:</p> 
+   <div>{{$workout->remarks}}</div>
+
    <div class="d-inline-block">
       <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
          @csrf
@@ -30,6 +45,7 @@ $(function(){
    
    </div>
    
+   <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/edit">Edit workout</a>
    <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
    <a class="btn btn-primary mb-2" href="/workouts">Back to workouts</a>
 

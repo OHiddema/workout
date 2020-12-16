@@ -38,21 +38,23 @@
 </script>
 
 <div class="container">
-   <h1>New Training</h1>
-   <form action="/workouts" method="post">
+   <h1>Edit Workout</h1>
+   <form action="/workouts/{{$workout->id}}" method="post">
       @csrf
+      @method('PUT')
    
       <div class="form-group">
-         <label for="date">Date</label>
+         <label for="date">Name</label>
          <input
             type="date"
             name="date"
             id="date"
             class="form-control"
-            value="{{old('date')}}">
+            value="{{old('date',$workout->date)}}">
             @error('date')
                <p class="alert alert-danger">{{$errors->first('date')}}</p>
             @enderror
+
       </div>
 
       <div class="form-group">
@@ -61,7 +63,7 @@
             type="number"
             name="rating"
             id="rating"
-            value="{{old('rating',3)}}"
+            value="{{old('rating',$workout->rating)}}"
             hidden>
          <br>
          <span class="fa fa-star" id="star1"></span>
@@ -81,16 +83,15 @@
             cols="30"
             rows="5"
             name="remarks"
-            id="remarks">
-            {{old('remarks')}}
-         </textarea>
+            id="remarks">{{old('remarks',$workout->remarks)}}</textarea>
          @error('remarks')
             <p class="alert alert-danger">{{$errors->first('remarks')}}</p>
          @enderror
       </div>
-         
-      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <a class="btn btn-primary" href="/workouts/{{$workout->id}}">Decline</a>
    </form>
 </div>
-
+   
 @endsection

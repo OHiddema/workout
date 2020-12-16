@@ -52,12 +52,13 @@ class WorkoutController extends Controller
 
     public function edit(Workout $workout)
     {
-        //
+        return view('workouts.edit', ['workout'=>$workout,]);
     }
 
     public function update(Request $request, Workout $workout)
     {
-        //
+        $workout->update($this->validateWorkout());
+        return redirect('workouts/'.$workout->id);
     }
 
     public function destroy(Workout $workout)
@@ -69,7 +70,9 @@ class WorkoutController extends Controller
     protected function validateWorkout()
     {
         return request()->validate([
-            'date'=>['required']
+            'date'=>['required'],
+            'rating'=>['integer','min:1','max:5'],
+            'remarks'=>[],
         ]);
     }
 

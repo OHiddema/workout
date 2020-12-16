@@ -15,3 +15,7 @@ td {
 tr:nth-child(even) {
 background-color: #ddd;
 }
+
+.checked {
+   color: blue;
+ }
