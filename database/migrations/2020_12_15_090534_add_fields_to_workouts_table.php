@@ -15,7 +15,7 @@ class AddFieldsToWorkoutsTable extends Migration
     {
         Schema::table('workouts', function (Blueprint $table) {
             $table->unsignedTinyInteger('rating')->default(3);
-            $table->text('remarks')->default('');
+            $table->text('remarks')->nullable();
         });    }
 
     /**

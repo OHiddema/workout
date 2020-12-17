@@ -27,16 +27,20 @@ $(function(){
    <h3>Training: {{date('l j-n-Y', strtotime($workout->date))}}</h3>
 
    <div>Rating:</div>
-   <span class="fa fa-star" id="star1"></span>
-   <span class="fa fa-star" id="star2"></span>
-   <span class="fa fa-star" id="star3"></span>
-   <span class="fa fa-star" id="star4"></span>
-   <span class="fa fa-star" id="star5"></span>
-
-   <div>Remarks:</div>
-   <div class="mb-2">
-      <span class="rounded p-1" style="background-color: lightgrey">{{$workout->remarks}}</span>
+   <div>
+      <span class="fa fa-star" id="star1"></span>
+      <span class="fa fa-star" id="star2"></span>
+      <span class="fa fa-star" id="star3"></span>
+      <span class="fa fa-star" id="star4"></span>
+      <span class="fa fa-star" id="star5"></span>
    </div>
+
+   @if ($workout->remarks != "")
+      <div>Remarks:</div>
+      <div class="mb-2">
+         <span class="rounded p-1" style="background-color: lightgrey">{{$workout->remarks}}</span>
+      </div>
+   @endif
 
    <div class="d-inline-block">
       <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
