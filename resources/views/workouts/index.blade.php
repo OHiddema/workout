@@ -3,36 +3,10 @@
 @section('content')
 
 <style>
-html,
-body {
-  height: 100%;
-}
-body {
-  font-size: 100%;
-  line-height: 1.5;
-  font-family: "Roboto Condensed", sans-serif;
-  background: #28283b;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#28283b), to(#0f0f17));
-  background-image: linear-gradient(#28283b 0%, #0f0f17 100%);
-  color: #444;
-}
 *,
 *:before,
 *:after {
   box-sizing: border-box;
-}
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: baseline;
-}
-a {
-  text-decoration: none;
 }
 .calendar-wrapper {
   /* width: 360px; */
@@ -48,7 +22,6 @@ table {
   border: 1px solid #dcdcff;
   border-radius: 3px;
   border-collapse: collapse;
-  color: #444;
 }
 td {
   height: 48px;
@@ -107,6 +80,10 @@ thead td {
 #btnNext:hover {
   color: #28283b;
   font-weight: bold;
+}
+.trainingDay a{
+  font-weight: 900;
+  color: blue;
 }
 </style>
 
@@ -310,6 +287,7 @@ return document.getElementById(id);
     day = d.getDate();
     // alert (day);
     $('#day' + day).html('<a href="/workouts/{{$workout->id}}">' + day + '</a>');
+    $('#day' + day).addClass('trainingDay');
   }); 
 </script>
 @endforeach
