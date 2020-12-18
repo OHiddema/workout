@@ -285,8 +285,11 @@ return document.getElementById(id);
   $(function(){
     d = new Date(<?php echo 1000*strtotime($workout->date) ?>);
     day = d.getDate();
-    // alert (day);
-    $('#day' + day).html('<a href="/workouts/{{$workout->id}}">' + day + '</a>');
+    if ($('#day' + day + ' a').length) {
+      $('#day' + day).html($('#day' + day).html() + ', <a href="/workouts/{{$workout->id}}">' + day + '</a>');
+    } else {
+      $('#day' + day).html('<a href="/workouts/{{$workout->id}}">' + day + '</a>');
+    }
     $('#day' + day).addClass('trainingDay');
   }); 
 </script>
