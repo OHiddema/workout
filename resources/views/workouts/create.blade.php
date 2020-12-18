@@ -51,10 +51,9 @@
          <label for="remarks">Remark(s)</label>
          <br>
          <textarea
-            cols="30"
-            rows="5"
             name="remarks"
             id="remarks"
+            class="form-control"
          >{{old('remarks')}}</textarea>
          @error('remarks')
             <p class="alert alert-danger">{{$errors->first('remarks')}}</p>
