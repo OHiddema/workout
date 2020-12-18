@@ -42,39 +42,50 @@ $(function(){
       </div>
    @endif
 
+   <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/Edit workout">Edit workout</a>
    <div class="d-inline-block">
       <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
          @csrf
          @method('DELETE')
-         <button class="btn btn-danger mb-2" type="submit" title="delete">Delete this workout</button>
+         <button class="btn btn-danger mb-2" type="submit" title="delete">Delete workout</button>
       </form>
-   
-   </div>
-   
-   <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/edit">Edit workout</a>
-   <a class="btn btn-primary mb-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
+   </div>   
 
-   <table>
-      <tbody>
-         @foreach ($workout->workoutlogs as $workoutlog)
+   <div id="sets" class="border-top border-dark">
+
+      <div class="text-center">
+         <a class="btn btn-primary mt-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
+      </div>
+         
+      <table class="mt-2">
+         <thead class="thead-light" style="text-align: center">
             <tr>
-               <td class="p-1" style="text-align: left;">
-                  <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
-                  <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
-                     @csrf
-                     @method('DELETE')
-                     <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
-                  </form>
-                  <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
-               </td>
-               @foreach ($workoutlog->sets as $set)
-                  <td>{{$set->reps}} x {{$set->weight}}</td>
-               @endforeach
+               <th>Exercise</th>
+               @for ($i = 1; $i <= $maxSets; $i++)
+                  <th>Set {{$i}}<br><small>reps x kg</small></th>
+               @endfor
             </tr>
-         @endforeach
-      </tbody>
-   </table>
+         </thead>
+         <tbody>
+            @foreach ($workout->workoutlogs as $workoutlog)
+               <tr>
+                  <td class="p-1" style="text-align: left;">
+                     <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
+                     <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
+                     </form>
+                     <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
+                  </td>
+                  @foreach ($workoutlog->sets as $set)
+                     <td>{{$set->reps}} x {{$set->weight}}</td>
+                  @endforeach
+               </tr>
+            @endforeach
+         </tbody>
+      </table>
+   </div>
 </div>
 
 @endsection
-

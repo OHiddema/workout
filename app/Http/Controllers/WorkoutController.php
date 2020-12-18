@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Workout;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 class WorkoutController extends Controller
 {
@@ -47,7 +48,17 @@ class WorkoutController extends Controller
 
     public function show(Workout $workout)
     {
-        return view('workouts.show', ['workout'=>$workout]);
+        $maxSets = DB::table('sets')
+                ->select(DB::raw('workoutlogs.id as ID'),DB::raw('COUNT(sets.id) as aantal'))
+                ->join('workoutlogs','sets.workoutlog_id','workoutlogs.id')
+                ->join('workouts','workoutlogs.workout_id','workouts.id')
+                ->where('workouts.user_id','=',auth()->user()->id)
+                ->where('workouts.id','=',$workout->id)
+                ->orderBy('workoutlogs.id')
+                ->groupBy('workoutlogs.id')
+                ->get()
+                ->max('aantal');
+        return view('workouts.show', ['workout'=>$workout, 'maxSets'=>$maxSets]);
     }
 
     public function edit(Workout $workout)
