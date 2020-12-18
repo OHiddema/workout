@@ -96,6 +96,9 @@
                               {{$set->reps}} x {{$set->weight}}
                            </td>
                         @endforeach
+                        @for ($i = $workoutlog->sets->count(); $i < $maxSets; $i++)
+                            <td></td>
+                        @endfor
                      </tr>
                   @endif                  
                @endforeach

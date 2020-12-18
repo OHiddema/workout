@@ -81,7 +81,10 @@ $(function(){
                   @foreach ($workoutlog->sets as $set)
                      <td>{{$set->reps}} x {{$set->weight}}</td>
                   @endforeach
-               </tr>
+                  @for ($i = $workoutlog->sets->count(); $i < $maxSets; $i++)
+                  <td></td>
+              @endfor
+     </tr>
             @endforeach
          </tbody>
       </table>
