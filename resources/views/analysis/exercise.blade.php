@@ -101,76 +101,77 @@
                @endforeach
             @endforeach
          </tbody>
-      </table>       
+      </table>
+
+      <div id="linechart"></div>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+
+         $(function(){
+            // Force redrawing to resize
+            lineChart();
+
+            // Make chart responsive
+            $(window).resize(function(){
+                  lineChart();
+            });
+         }); 
+
+         var graphData = <?php echo $graphData; ?>;
+         google.charts.load('current', {
+            'packages': ['corechart']
+         });
+         google.charts.setOnLoadCallback(lineChart);
+
+         function lineChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'date');
+            data.addColumn('number', 'oneRM');
+            for (i=0;i<graphData.length;i++) {
+               data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
+            }
+            
+            var options = {
+            
+               hAxis: {
+                  title: 'Date',
+                  format: 'd MMM yy'
+               },
+
+               vAxis: {
+                  title: 'Estimated 1RM',
+                  minValue: 0
+               },
+
+               title: 'Estimated 1RM progression over time',
+
+               titleTextStyle: {
+                  fontSize: 24,
+               },
+
+               legend: {
+                  position: 'none'
+               },
+
+               backgroundColor: {
+                  stroke: '#000000',
+                  strokeWidth: 4,
+               },
+
+               pointSize: 5,
+               width:$('#myTable').width()+4,
+               height:$('#myTable').width()*0.5,
+
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+            chart.draw(data, options);
+         }        
+      </script>  
    @endif
 
-   <div id="linechart"></div>
 
 </div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-   $(function(){
-      // Force redrawing to resize
-      lineChart();
-
-      // Make chart responsive
-      $(window).resize(function(){
-            lineChart();
-      });
-   }); 
-
-   var graphData = <?php echo $graphData; ?>;
-   google.charts.load('current', {
-      'packages': ['corechart']
-   });
-   google.charts.setOnLoadCallback(lineChart);
-
-   function lineChart() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('date', 'date');
-      data.addColumn('number', 'oneRM');
-      for (i=0;i<graphData.length;i++) {
-         data.addRows([[new Date(graphData[i][0]), graphData[i][1]]]);
-      }
-      
-      var options = {
-      
-         hAxis: {
-            title: 'Date',
-            format: 'd MMM yy'
-         },
-
-         vAxis: {
-            title: 'Estimated 1RM',
-            minValue: 0
-         },
-
-         title: 'Estimated 1RM progression over time',
-
-         titleTextStyle: {
-            fontSize: 24,
-         },
-
-         legend: {
-            position: 'none'
-         },
-
-         backgroundColor: {
-            stroke: '#000000',
-            strokeWidth: 4,
-         },
-
-         pointSize: 5,
-         width:$('#myTable').width()+4,
-         height:$('#myTable').width()*0.5,
-
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('linechart'));
-      chart.draw(data, options);
-   }        
-</script>  
 
 @endsection
