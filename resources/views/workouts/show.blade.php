@@ -42,7 +42,7 @@ $(function(){
       </div>
    @endif
 
-   <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/Edit workout">Edit workout</a>
+   <a class="btn btn-primary mb-2" href="/workouts/{{$workout->id}}/edit">Edit workout</a>
    <div class="d-inline-block">
       <form class="delWorkout" action="/workouts/{{$workout->id}}" method="POST">
          @csrf
