@@ -54,9 +54,8 @@
             cols="30"
             rows="5"
             name="remarks"
-            id="remarks">
-            {{old('remarks')}}
-         </textarea>
+            id="remarks"
+         >{{old('remarks')}}</textarea>
          @error('remarks')
             <p class="alert alert-danger">{{$errors->first('remarks')}}</p>
          @enderror
