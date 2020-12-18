@@ -37,7 +37,7 @@ td.not-current {
 td.today {
   font-weight: 700;
   color: #28283b;
-  font-size: 1.5em;
+  background-color: chartreuse;
 }
 thead td {
   border: none;
