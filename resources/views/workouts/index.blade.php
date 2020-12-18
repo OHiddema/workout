@@ -8,14 +8,6 @@
 *:after {
   box-sizing: border-box;
 }
-.calendar-wrapper {
-  /* width: 360px; */
-  /* margin: 3em auto; */
-  padding: 2em;
-  border: 1px solid #dcdcff;
-  border-radius: 5px;
-  background: #fff;
-}
 table {
   clear: both;
   width: 100%;
@@ -89,19 +81,15 @@ thead td {
 
 <div class="container">
 
-   <div class="text-center">
-      <a class="btn btn-primary mb-2" href="/workouts/create">Create new workout</a>
-   </div>
+  <div class="text-center">
+    <a class="btn btn-primary mb-2" href="/workouts/create">Create new workout</a>
+  </div>
 
-   <form id="monthswitch" action="/workouts" method="get" style="display: none">
-      <input type="hidden" id="months" name="months" value="{{$months}}">
-   </form>
+  <form id="monthswitch" action="/workouts" method="get" style="display: none">
+    <input type="hidden" id="months" name="months" value="{{$months}}">
+  </form>
 
-   <div class="calendar-wrapper">
-    <button id="btnPrev" type="button">Prev</button>
-      <button id="btnNext" type="button">Next</button>
-    <div id="divCal"></div>
-  </div>   
+  <div id="divCal"></div>
 
 </div>
 
@@ -190,7 +178,7 @@ var html = '<table>';
 
 // Write selected month and year
 html += '<thead><tr>';
-html += '<td colspan="7">' + this.Months[m] + ' ' + y + '</td>';
+html += '<td colspan="7"><button id="btnPrev" type="button">Prev</button>' + this.Months[m] + ' ' + y + '<button id="btnNext" type="button">Next</button></td>';
 html += '</tr></thead>';
 
 
