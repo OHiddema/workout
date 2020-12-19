@@ -228,19 +228,10 @@ window.onload = function() {
   var c = new Cal("divCal");			
   c.showcurr();
 
-  // Bind next and previous button clicks
-  getId('btnNext').onclick = function() {
-    c.nextMonth();
-  };
-  getId('btnPrev').onclick = function() {
-    c.previousMonth();
-  };
+  $('#btnNext').on('click',function() {c.nextMonth();});
+  $('#btnPrev').on('click',function() {c.previousMonth()});
 }
 
-// Get element by id
-function getId(id) {
-  return document.getElementById(id);
-}
 </script>
 
 <!--################## ADDED #########################-->
