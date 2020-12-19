@@ -106,7 +106,7 @@ var Cal = function(divId) {
   //Store div id
   this.divId = divId;
 
-  // Days of week, starting on Sunday
+  // Days of week, starting on Monday
   this.DaysOfWeek = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
   // Months, stating on January
@@ -171,11 +171,11 @@ Cal.prototype.showMonth = function(y, m) {
 
     var dow = new Date(y, m, i).alt_getDay();
 
-    // If Sunday, start new row
+    // If Monday, start new row
     if ( dow == 0 ) {
       html += '<tr>';
     }
-    // If not Sunday but first day of the month
+    // If not Monday but first day of the month
     // it will write the last days from the previous month
     else if ( i == 1 ) {
       html += '<tr>';
@@ -197,11 +197,11 @@ Cal.prototype.showMonth = function(y, m) {
       html += '<td class="normal" id="day' + i + '">' + i + '</td>';
       // ##### added id ##################
     }
-    // If Saturday, closes the row
+    // If Sunday, closes the row
     if ( dow == 6 ) {
       html += '</tr>';
     }
-    // If not Saturday, but last day of the selected month
+    // If not Sunday, but last day of the selected month
     // it will write the next few days from the next month
     else if ( i == lastDateOfMonth ) {
       var k=1;
