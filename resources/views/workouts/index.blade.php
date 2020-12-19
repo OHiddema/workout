@@ -94,20 +94,27 @@ thead td {
 </div>
 
 <script>
-  var Cal = function(divId) {
+
+// returns alternative day of the week,
+// where Mon = 0, Tue = 1, ... Sun = 6, instead of Sun = 0, Mon = 1, ... Sat = 6
+Date.prototype.alt_getDay = function () {
+  return (this.getDay() + 6) % 7;
+};
+
+var Cal = function(divId) {
 
 //Store div id
 this.divId = divId;
 
 // Days of week, starting on Sunday
 this.DaysOfWeek = [
-  'Sun',
   'Mon',
   'Tue',
   'Wed',
   'Thu',
   'Fri',
-  'Sat'
+  'Sat',
+  'Sun',
 ];
 
 // Months, stating on January
@@ -167,7 +174,7 @@ Cal.prototype.showMonth = function(y, m) {
 
 var d = new Date()
 // First day of the week in the selected month
-, firstDayOfMonth = new Date(y, m, 1).getDay()
+, firstDayOfMonth = new Date(y, m, 1).alt_getDay()
 // Last day of the selected month
 , lastDateOfMonth =  new Date(y, m+1, 0).getDate()
 // Last day of the previous month
@@ -193,7 +200,7 @@ html += '</tr>';
 var i=1;
 do {
 
-  var dow = new Date(y, m, i).getDay();
+  var dow = new Date(y, m, i).alt_getDay();
 
   // If Sunday, start new row
   if ( dow == 0 ) {
