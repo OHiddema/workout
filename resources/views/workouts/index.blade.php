@@ -171,7 +171,7 @@ var d = new Date()
 // Last day of the selected month
 , lastDateOfMonth =  new Date(y, m+1, 0).getDate()
 // Last day of the previous month
-, lastDayOfLastMonth = m == 0 ? new Date(y-1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+, lastDayOfLastMonth = m == 0 ? new Date(y-1, 12, 0).getDate() : new Date(y, m, 0).getDate();
 
 
 var html = '<table>';
