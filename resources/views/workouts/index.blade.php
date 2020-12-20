@@ -89,6 +89,8 @@ thead td {
     <input type="hidden" id="months" name="months" value="{{$months}}">
   </form>
 
+  <button id="btnNext" type="button">Next</button>
+  <button id="btnPrev" type="button">Prev</button>
   <div id="divCal"></div>
 
 </div>
@@ -154,7 +156,9 @@ Cal.prototype.showMonth = function(y, m) {
 
   // Write selected month and year
   html += '<thead><tr>';
-  html += '<td colspan="7"><button id="btnPrev" type="button">Prev</button>' + this.Months[m] + ' ' + y + '<button id="btnNext" type="button">Next</button></td>';
+  html += '<td colspan="7">';
+  html += this.Months[m] + ' ' + y;
+  html += '</td>';
   html += '</tr></thead>';
 
 
