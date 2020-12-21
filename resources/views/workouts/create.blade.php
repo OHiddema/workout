@@ -22,7 +22,7 @@
             name="date"
             id="date"
             class="form-control"
-            value="{{old('date')}}">
+            value="{{old('date',date('Y-m-d',date_timestamp_get(date_create())))}}">
             @error('date')
                <p class="alert alert-danger">{{$errors->first('date')}}</p>
             @enderror
