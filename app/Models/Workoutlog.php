@@ -17,6 +17,7 @@ class Workoutlog extends Model
     protected $fillable = [
         'exercise_id',
         'workout_id',
+        'order',
     ];
 
     public function workout() {

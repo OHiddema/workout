@@ -21,7 +21,41 @@ $(function(){
 
 }); 
 
+function allowDrop(ev) {
+   ev.preventDefault();
+}
+
+function drag(ev) {
+   ev.dataTransfer.setData("text", ev.target.id);
+   $('#drag_id').val(ev.target.id);
+}
+
+function drop(ev) {
+   ev.preventDefault();
+
+   $('#drop_id').val($(ev.target).parent().attr('id'));
+   prev = $(ev.target).parent().prev().attr('id');
+   if (typeof prev === "undefined") {  //there is no previous record
+      $('#drop_prev_id').val($(ev.target).parent().attr('id'))
+   } else {
+      $('#drop_prev_id').val(prev);
+   }
+
+   var data = ev.dataTransfer.getData("text");
+   $('#' + data).insertBefore(ev.target.parentElement);
+
+   $('#form_reorder').submit();
+}
 </script>
+
+{{-- Invisible form, used to reorder workoutlogs after drag & drop --}}
+<form id="form_reorder" action="/workoutlogs/reorder/{{$workout->id}}" method="post" hidden>
+   @csrf
+   @method('PUT')
+   <input type="number" id="drag_id" name="drag_id"> 
+   <input type="number" id="drop_id" name="drop_id"> 
+   <input type="number" id="drop_prev_id" name="drop_prev_id"> 
+</form>
 
 <div class="container">
    <h3>Training: {{date('l j-n-Y', strtotime($workout->date))}}</h3>
@@ -67,8 +101,8 @@ $(function(){
             </tr>
          </thead>
          <tbody>
-            @foreach ($workout->workoutlogs as $workoutlog)
-               <tr>
+            @foreach ($workout->workoutlogs->sortBy('order') as $workoutlog)
+               <tr  id="{{$workoutlog->id}}" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <td class="p-1" style="text-align: left;">
                      <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
                      <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">

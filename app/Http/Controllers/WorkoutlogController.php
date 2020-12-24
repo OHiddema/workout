@@ -70,6 +70,7 @@ class WorkoutlogController extends Controller
             'exercise_id'=>['required'],
             'workout_id'=>['required']
         ]));
+        $workoutlog->update(['order' => $workoutlog->id]);
 
         for ($i = 0; $i <= $nsets-1; $i++) {
             \App\Models\Set::create([
@@ -160,5 +161,18 @@ class WorkoutlogController extends Controller
     {
         $workoutlog->delete();
         return redirect('workouts/'.$workoutlog->workout->id);
+    }
+
+    public function reorder(Workout $workout, Request $request)
+    {
+        $dragId = Workoutlog::find(request('drag_id'));
+        $dropId = Workoutlog::find(request('drop_id'));
+        $prevId = Workoutlog::find(request('drop_prev_id'));
+
+        $order = ($dropId->order + $prevId->order)/2;
+        if ($dropId->id == $prevId->id) {$order--;}; //there was no previous record
+        $dragId->update(['order'=> $order]);
+
+        return redirect('workouts/'.$workout->id);
     }
 }
