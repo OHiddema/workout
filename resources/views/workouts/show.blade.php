@@ -101,7 +101,7 @@ function drop(ev) {
             </tr>
          </thead>
          <tbody>
-            @foreach ($workout->workoutlogs->sortBy('order') as $workoutlog)
+            @forelse ($workout->workoutlogs->sortBy('order') as $workoutlog)
                <tr  id="{{$workoutlog->id}}" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <td class="p-1" style="text-align: left;">
                      <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
@@ -116,10 +116,12 @@ function drop(ev) {
                      <td>{{$set->reps}} x {{$set->weight}}</td>
                   @endforeach
                   @for ($i = $workoutlog->sets->count(); $i < $maxSets; $i++)
-                  <td></td>
-              @endfor
-     </tr>
-            @endforeach
+                     <td></td>
+                  @endfor
+               </tr>
+            @empty
+               <tr><td>No exercises!</td></tr>
+            @endforelse
          </tbody>
       </table>
    </div>
