@@ -90,40 +90,42 @@ function drop(ev) {
       <div class="text-center">
          <a class="btn btn-primary mt-2" href="/workoutlogs/{{$workout->id}}/create">Add exercise</a>
       </div>
-         
-      <table class="mt-2">
-         <thead class="thead-light" style="text-align: center">
-            <tr>
-               <th>Exercise</th>
-               @for ($i = 1; $i <= $maxSets; $i++)
-                  <th>Set {{$i}}<br><small>reps x kg</small></th>
-               @endfor
-            </tr>
-         </thead>
-         <tbody>
-            @forelse ($workout->workoutlogs->sortBy('order') as $workoutlog)
-               <tr  id="{{$workoutlog->id}}" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
-                  <td class="p-1" style="text-align: left;">
-                     <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
-                     <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
-                     </form>
-                     <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
-                  </td>
-                  @foreach ($workoutlog->sets as $set)
-                     <td>{{$set->reps}} x {{$set->weight}}</td>
-                  @endforeach
-                  @for ($i = $workoutlog->sets->count(); $i < $maxSets; $i++)
-                     <td></td>
+
+      @if ($workout->workoutlogs->count()==0)
+         This workout has no exercises!    
+      @else
+         <table class="mt-2">
+            <thead class="thead-light" style="text-align: center">
+               <tr>
+                  <th>Exercise</th>
+                  @for ($i = 1; $i <= $maxSets; $i++)
+                     <th>Set {{$i}}<br><small>reps x kg</small></th>
                   @endfor
                </tr>
-            @empty
-               <tr><td>No exercises!</td></tr>
-            @endforelse
-         </tbody>
-      </table>
+            </thead>
+            <tbody>
+               @foreach ($workout->workoutlogs->sortBy('order') as $workoutlog)
+                  <tr  id="{{$workoutlog->id}}" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                     <td class="p-1" style="text-align: left;">
+                        <a class="btn btn-sm btn-primary" href="/workoutlogs/{{$workoutlog->id}}/edit">Edit</a>
+                        <form class="delWorkoutlog d-inline-block" action="/workoutlogs/{{$workoutlog->id}}" method="POST">
+                           @csrf
+                           @method('DELETE')
+                           <button class="btn btn-sm btn-danger" type="submit" title="delete">Delete</button>
+                        </form>
+                        <span class="d-inline-block ml-2">{{$workoutlog->exercise->name}}</span>
+                     </td>
+                     @foreach ($workoutlog->sets as $set)
+                        <td>{{$set->reps}} x {{$set->weight}}</td>
+                     @endforeach
+                     @for ($i = $workoutlog->sets->count(); $i < $maxSets; $i++)
+                        <td></td>
+                     @endfor
+                  </tr>
+               @endforeach
+            </tbody>
+         </table>          
+      @endif   
    </div>
 </div>
 
